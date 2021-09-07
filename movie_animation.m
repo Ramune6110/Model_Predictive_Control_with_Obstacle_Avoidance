@@ -30,6 +30,21 @@ for i = 1:sim_step
     plot(xlog_two(1,1:i), xlog_two(2,1:i), 'b--', 'LineWidth', 1.0, 'MarkerSize', 4); hold on;
     plot(xlog_three(1,1:i), xlog_three(2,1:i), 'r--', 'LineWidth', 1.0, 'MarkerSize', 4); hold on;
     plot(xlog_four(1,1:i), xlog_four(2,1:i), 'g--', 'LineWidth', 1.0, 'MarkerSize', 4); hold on;
+    grid on
+    hold on;
+    axis equal
+    x_range = [-6.0, 1.0];
+    y_range = [-6.0, 1.0];
+    xlim(x_range);
+    ylim(y_range);
+    xlabel("X [m]")
+    ylabel("Y [m]")
+    set(gca, 'FontName', 'Arial', 'FontSize', 14)
+    set(gca, 'FontName', 'Arial', 'FontSize', 14)
+    set(gca,'color','white');
+    ax = gca;
+    ax.LineWidth = 1;
+    box on
     
     % Obstacle
     x_curr_one = x_curr_one_log(:, :, i);
@@ -73,14 +88,6 @@ for i = 1:sim_step
     x = cos(th) ; y = sin(th) ;
     plot(pos4(1) + r*x, pos4(2) + r*y, 'g', 'LineWidth', 2); hold on;
     
-    xlim([-6, 1.0]);
-    ylim([-6, 1.0]);
-    
-    xlabel('$x (m)$','interpreter','latex','FontSize',20);
-    ylabel('$y (m)$','interpreter','latex','FontSize',20);
-    
-    grid on
-    axis equal
     hold off;
         
     legend('first plane','second plane','third plane','fourth plane', ...
