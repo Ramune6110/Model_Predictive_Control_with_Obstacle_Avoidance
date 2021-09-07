@@ -25,11 +25,11 @@ fig_traj = figure;
 hold on
 
 for i = 1:sim_step
-%     % plot closed-loop trajectory
-%     plot(xlog_one(1,1:i), xlog_one(2,1:i), 'k--', 'LineWidth', 1.0, 'MarkerSize', 4); hold on;
-%     plot(xlog_two(1,1:i), xlog_two(2,1:i), 'b--', 'LineWidth', 1.0, 'MarkerSize', 4); hold on;
-%     plot(xlog_three(1,1:i), xlog_three(2,1:i), 'r--', 'LineWidth', 1.0, 'MarkerSize', 4); hold on;
-%     plot(xlog_four(1,1:i), xlog_four(2,1:i), 'g--', 'LineWidth', 1.0, 'MarkerSize', 4); hold on;
+    % plot closed-loop trajectory
+    plot(xlog_one(1,1:i), xlog_one(2,1:i), 'k--', 'LineWidth', 1.0, 'MarkerSize', 4); hold on;
+    plot(xlog_two(1,1:i), xlog_two(2,1:i), 'b--', 'LineWidth', 1.0, 'MarkerSize', 4); hold on;
+    plot(xlog_three(1,1:i), xlog_three(2,1:i), 'r--', 'LineWidth', 1.0, 'MarkerSize', 4); hold on;
+    plot(xlog_four(1,1:i), xlog_four(2,1:i), 'g--', 'LineWidth', 1.0, 'MarkerSize', 4); hold on;
     
     % Obstacle
     x_curr_one = x_curr_one_log(:, :, i);

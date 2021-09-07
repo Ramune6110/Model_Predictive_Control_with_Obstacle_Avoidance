@@ -29,10 +29,6 @@ P = 100*eye(3);
 Q = 10*eye(3);
 R = eye(2);
 
-% P = 100*eye(3);
-% Q = 10*eye(3);
-% R = 100*eye(2);
-
 N = 3;
 xmin = [-5; -5; -5];
 xmax = [5; 5; 5];
@@ -104,16 +100,17 @@ for i = 1:sim_step
     obs4.r = 0.5;
 
     %% Solve CFTOC    
-    [~, uk_one] = solveMPCDC(x_curr_one, x_curr_two, x_curr_three, x_curr_four, system, params_mpc_dc, obs2, obs3, obs4, target1);
-    [~, uk_two] = solveMPCDC(x_curr_two, x_curr_one, x_curr_three, x_curr_four, system, params_mpc_dc, obs1, obs3, obs4, target2);
-    [~, uk_three] = solveMPCDC(x_curr_three, x_curr_one, x_curr_two, x_curr_four, system, params_mpc_dc, obs1, obs2, obs4, target3);
-    [~, uk_four] = solveMPCDC(x_curr_four, x_curr_one, x_curr_two, x_curr_three, system, params_mpc_dc, obs1, obs2, obs3, target4);
+    [~, uk_one] = solveMPC(x_curr_one, x_curr_two, x_curr_three, x_curr_four, system, params_mpc_dc, obs2, obs3, obs4, target1);
+    [~, uk_two] = solveMPC(x_curr_two, x_curr_one, x_curr_three, x_curr_four, system, params_mpc_dc, obs1, obs3, obs4, target2);
+    [~, uk_three] = solveMPC(x_curr_three, x_curr_one, x_curr_two, x_curr_four, system, params_mpc_dc, obs1, obs2, obs4, target3);
+    [~, uk_four] = solveMPC(x_curr_four, x_curr_one, x_curr_two, x_curr_three, system, params_mpc_dc, obs1, obs2, obs3, target4);
     
     uk_one
     uk_two
     uk_three
     uk_four
     
+    %% dynamics update
     if isempty(uk_one) 
         uk_one = [0; 0];
         xk_one = f(xk_one, uk_one, dt);
@@ -189,7 +186,7 @@ function x = f(x, u, dt)
     x = A * x + B * u;
 end
 
-function [xopt, uopt] = solveMPCDC(xk, opponent_one, opponent_two, opponent_three, system, params_mpc_dc, obs1, obs2, obs3, target)
+function [xopt, uopt] = solveMPC(xk, opponent_one, opponent_two, opponent_three, system, params_mpc_dc, obs1, obs2, obs3, target)
     % Solve MPC-DC
     [feas, x, u, J] = solve_cftoc(xk, opponent_one, opponent_two, opponent_three, system, params_mpc_dc, obs1, obs2, obs3, target);
     if ~feas
@@ -291,28 +288,24 @@ function Animation(xlog_one, xlog_two, xlog_three, xlog_four, obs1, obs2, obs3, 
     % plot obstacle
     pos1 = obs1.pos;
     r = obs1.r;
-%     r = 0.4;
     th = linspace(0,2*pi*100);
     x = cos(th) ; y = sin(th) ;
     plot(pos1(1) + r*x, pos1(2) + r*y, 'k','LineWidth', 2); 
     
     pos2 = obs2.pos;
     r = obs2.r;
-%     r = 0.4;
     th = linspace(0,2*pi*100);
     x = cos(th) ; y = sin(th) ;
     plot(pos2(1) + r*x, pos2(2) + r*y, 'b','LineWidth', 2);
     
     pos3 = obs3.pos;
     r = obs3.r;
-%     r = 0.4;
     th = linspace(0,2*pi*100);
     x = cos(th) ; y = sin(th) ;
     plot(pos3(1) + r*x, pos3(2) + r*y, 'r','LineWidth', 2);
 
     pos4 = obs4.pos;
     r = obs4.r;
-%     r = 0.4;
     th = linspace(0,2*pi*100);
     x = cos(th) ; y = sin(th) ;
     plot(pos4(1) + r*x, pos4(2) + r*y, 'g', 'LineWidth', 2);
