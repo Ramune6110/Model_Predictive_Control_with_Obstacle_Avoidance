@@ -5,7 +5,7 @@ The four robots head for their respective destination values. At that time, cont
 
 # Procedure
 ## STEP1
-To use IPOPT solver with YALMIP, unzip the ipopt zip file of packeges and define the path to the folder in the matlab script file.
+To use IPOPT solver with YALMIP, unzip [the ipopt zip](https://github.com/Ramune6110/Model_Predictive_Control_with_Obstacle_Avoidance/tree/main/packages) file of packeges and define the path to the folder in the matlab script file.
 
 ## STEP2
 Clone this repository to your local environment and run ~.m
