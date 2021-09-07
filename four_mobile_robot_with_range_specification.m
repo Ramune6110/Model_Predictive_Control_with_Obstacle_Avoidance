@@ -284,40 +284,52 @@ function Animation(xlog_one, xlog_two, xlog_three, xlog_four, obs1, obs2, obs3, 
     plot(xlog_two(1,1:i), xlog_two(2,1:i), 'b--', 'LineWidth', 1.0, 'MarkerSize', 4); hold on;
     plot(xlog_three(1,1:i), xlog_three(2,1:i), 'r--', 'LineWidth', 1.0, 'MarkerSize', 4); hold on;
     plot(xlog_four(1,1:i), xlog_four(2,1:i), 'g--', 'LineWidth', 1.0, 'MarkerSize', 4); hold on;
+    grid on
+    hold on;
+    axis equal
+    x_range = [-6.0, 1.0];
+    y_range = [-6.0, 1.0];
+    xlim(x_range);
+    ylim(y_range);
+    xlabel("X [m]")
+    ylabel("Y [m]")
+    set(gca, 'FontName', 'Arial', 'FontSize', 14)
+    set(gca, 'FontName', 'Arial', 'FontSize', 14)
+    set(gca,'color','white');
+    ax = gca;
+    ax.LineWidth = 1;
+    box on
     
     % plot obstacle
     pos1 = obs1.pos;
     r = obs1.r;
     th = linspace(0,2*pi*100);
     x = cos(th) ; y = sin(th) ;
-    plot(pos1(1) + r*x, pos1(2) + r*y, 'k','LineWidth', 2); 
+    plot(pos1(1) + r*x, pos1(2) + r*y, 'k','LineWidth', 2); hold on;
     
     pos2 = obs2.pos;
     r = obs2.r;
     th = linspace(0,2*pi*100);
     x = cos(th) ; y = sin(th) ;
-    plot(pos2(1) + r*x, pos2(2) + r*y, 'b','LineWidth', 2);
+    plot(pos2(1) + r*x, pos2(2) + r*y, 'b','LineWidth', 2); hold on;
     
     pos3 = obs3.pos;
     r = obs3.r;
     th = linspace(0,2*pi*100);
     x = cos(th) ; y = sin(th) ;
-    plot(pos3(1) + r*x, pos3(2) + r*y, 'r','LineWidth', 2);
+    plot(pos3(1) + r*x, pos3(2) + r*y, 'r','LineWidth', 2); hold on;
 
     pos4 = obs4.pos;
     r = obs4.r;
     th = linspace(0,2*pi*100);
     x = cos(th) ; y = sin(th) ;
-    plot(pos4(1) + r*x, pos4(2) + r*y, 'g', 'LineWidth', 2);
-
-    grid on
-    xlabel('$x (m)$','interpreter','latex','FontSize',20);
-    ylabel('$y (m)$','interpreter','latex','FontSize',20);
-    xlim([-6, 1.0]);
-    ylim([-6, 1.0]);
+    plot(pos4(1) + r*x, pos4(2) + r*y, 'g', 'LineWidth', 2); hold on;
     
-    axis equal
     hold off;
+        
+    legend('first plane','second plane','third plane','fourth plane', ...
+           'Location','southeast','FontSize',10.0)
+    legend('boxoff')
     
-    drawnow;
+    drawnow
 end
