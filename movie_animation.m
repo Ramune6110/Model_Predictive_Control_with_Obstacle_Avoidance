@@ -20,9 +20,8 @@ Vid_traj.FrameRate = 5;
 Vid_traj.Quality = 100;
 open(Vid_traj);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    
-fig_traj = figure;
-hold on
+
+figure('Renderer', 'painters', 'Position', [0 0 1000 1000]);
 
 for i = 1:sim_step
     % plot closed-loop trajectory
@@ -39,8 +38,8 @@ for i = 1:sim_step
     ylim(y_range);
     xlabel("X [m]")
     ylabel("Y [m]")
-    set(gca, 'FontName', 'Arial', 'FontSize', 14)
-    set(gca, 'FontName', 'Arial', 'FontSize', 14)
+    set(gca, 'FontName', 'Arial', 'FontSize', 20)
+    set(gca, 'FontName', 'Arial', 'FontSize', 20)
     set(gca,'color','white');
     ax = gca;
     ax.LineWidth = 1;
@@ -90,8 +89,8 @@ for i = 1:sim_step
     
     hold off;
         
-    legend('first plane','second plane','third plane','fourth plane', ...
-           'Location','southeast','FontSize',10.0)
+    legend('first robot','second robot','third robot','fourth robot', ...
+           'Location','southeast','FontSize',20.0)
     legend('boxoff')
     
     drawnow
